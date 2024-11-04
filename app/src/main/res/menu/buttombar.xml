@@ -1,0 +1,26 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="@string/menu_home" />
+
+    <item
+        android:id="@+id/nav_courses"
+        android:icon="@drawable/ic_baseline_school_24"
+        android:title="@string/menu_courses" />
+
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="@string/menu_profile" />
+
+    <item
+        android:id="@+id/nav_artikel"
+        android:icon="@drawable/ic_baseline_article_24"
+        android:title="@string/menu_artikel" />
+
+    <item
+        android:id="@+id/nav_history"
+        android:icon="@drawable/ic_baseline_history_24"
+        android:title="@string/menu_history" />
+</menu>

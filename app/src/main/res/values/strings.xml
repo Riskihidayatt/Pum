@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Pum</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_courses">Courses</string>
+    <string name="menu_profile">Profile</string>
+    <string name="menu_artikel">Artikel</string>
+    <string name="menu_history">History</string>
+    <string name="image_desc">Deskripsi gambar</string>
+    <string name="judul_materi">Judul Materi</string>
+    <string name="all_artickel">All Artickel</string>
+    <string name="creator_string">Creator: %1$s</string>
+    <string name="save">Simpan</string>
+    <string name="category_hint">Kategori Artikel</string>
+    <string name="title_hint">Judul Artikel</string>
+    <string name="content_hint">Konten Artikel</string>
+    <string name="back">Back</string>
+    <string name="edit_picture">Picture</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="thumbnail_description">oke</string>
+
+</resources>

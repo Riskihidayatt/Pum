@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "252565327202",
+    "project_id": "learningtech-b56b9",
+    "storage_bucket": "learningtech-b56b9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:252565327202:android:92ca88cd01a2645e62b03b",
+        "android_client_info": {
+          "package_name": "com.example.pum"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7RsDH49TDTFFdGx7Izw2MDYNt3gdPgTk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
