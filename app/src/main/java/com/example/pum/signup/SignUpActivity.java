@@ -146,7 +146,9 @@ public class SignUpActivity extends AppCompatActivity {
         db.collection("users").document(userId)
                 .set(user)
                 .addOnSuccessListener(aVoid -> {
+                    // Menampilkan pesan sukses dan beralih ke LoginActivity
                     Toast.makeText(SignUpActivity.this, "Pendaftaran berhasil!", Toast.LENGTH_SHORT).show();
+                    // Pindah ke LoginActivity setelah pendaftaran berhasil
                     startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
                     finish();
                 })

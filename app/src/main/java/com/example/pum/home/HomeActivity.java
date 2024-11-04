@@ -2,8 +2,10 @@ package com.example.pum.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,7 +14,12 @@ import com.example.pum.R;
 import com.example.pum.artikel.ArtikelActivity;
 import com.example.pum.course.CourseActivity;
 import com.example.pum.profile.ProfileActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -26,6 +33,7 @@ public class HomeActivity extends AppCompatActivity {
     private List<Home> homeList = new ArrayList<>();
     private BottomNavigationView bottomNavigationView;
     private FirebaseFirestore db;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +42,22 @@ public class HomeActivity extends AppCompatActivity {
 
         recyclerViewVideos = findViewById(R.id.recyclerViewVideos);
         bottomNavigationView = findViewById(R.id.bottomNavigation);
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
+        // Mendapatkan pengguna yang sedang login
+        FirebaseUser currentUser = auth.getCurrentUser();
+
+        if (currentUser != null) {
+            String userId = currentUser.getUid();
+            loadUserData(userId); // Memanggil fungsi untuk load data user
+        } else {
+            Toast.makeText(this, "No user logged in", Toast.LENGTH_SHORT).show();
+        }
 
         recyclerViewVideos.setLayoutManager(new LinearLayoutManager(this));
         homeAdapter = new HomeAdapter(this, homeList);
         recyclerViewVideos.setAdapter(homeAdapter);
-
-        db = FirebaseFirestore.getInstance();
 
         loadRecommendedVideos();
 
@@ -68,6 +86,29 @@ public class HomeActivity extends AppCompatActivity {
 
             return false;
         });
+    }
+
+    // Fungsi untuk memuat data pengguna dari Firestore
+    private void loadUserData(String userId) {
+        db.collection("users").document(userId)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                String name = document.getString("name");
+                                TextView tvUserName = findViewById(R.id.tvUserName);
+                                tvUserName.setText(name);
+                            } else {
+                                Toast.makeText(HomeActivity.this, "User data not found", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(HomeActivity.this, "Error getting user data", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     private void loadRecommendedVideos() {
